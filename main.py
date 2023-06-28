@@ -1,19 +1,13 @@
 # by: Christopher Jiovanni A. Orpilla
-# create an application
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.widget import Widget
-class BoxLayoutExample(BoxLayout):
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
 
-    pass
-
-class MainWidget(Widget):
-
-    pass
-class ThelabApp(App):
-    pass
-
-ThelabApp().run()
+# create an application
+class DataBase(App):
+    def build(self):
 
 # def create():
 #     print("-- create an Account --")
