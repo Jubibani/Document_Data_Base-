@@ -1,13 +1,39 @@
 # by: Christopher Jiovanni A. Orpilla
 from kivy.app import App
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 
 # create an application
-class DataBase(App):
+class MyApp(App):
     def build(self):
+        self.window = GridLayout()
+        self.window.cols = 1
+        # add widgets to window
+
+        self.greet_user = Label(
+            text="hello!"
+            + "  " + "let's create your account"
+        )
+
+        self.window.add_widget(self.greet_user)
+        self.user_name = TextInput(multiline=False)
+        self.window.add_widget(self.user_name)
+
+        self.button = Button(text="Greet")
+        self.button.bind(on_press=self.callback)
+        self.window.add_widget(self.button)
+        return self.window
+    def callback(self, instance):
+        self.greet_user.text = "You are " + self.user_name.text + "!"
+
+
+if __name__ == '__main__':
+    MyApp().run()
 
 # def create():
 #     print("-- create an Account --")
