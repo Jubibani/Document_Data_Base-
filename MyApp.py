@@ -1,39 +1,48 @@
 # by: Christopher Jiovanni A. Orpilla
+import kivy
 from kivy.app import App
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+# create an application (login_screen)
+kivy.require('2.2.1')
 
-# create an application
-class MyApp(App):
+# functionality for user input
+class MyApp(GridLayout):
+    # create initialization
+    def __init__(self, **kwargs):
+        # calling the MyApp Constructor
+        super(MyApp, self).__init__(**kwargs)
+        self.cols = 2
+        # add_widgets
+        # creating account
+        self.greet = Label(
+            text=
+            "   ---- Personal Data Base ----"
+            "\n Hello! What should we call you?")
+        self.add_widget(self.greet)
+        # it will default the program to have multiple lines, but we only want one
+        self.user = TextInput(multiline=False )
+        self.add_widget(self.user)
+        # creating_password
+        self.password_txt = Label(text="Enter Password: ")   # method_1: for display
+        self.add_widget(self.password_txt)
+        self.enter_password = TextInput(multiline=False)
+        self.add_widget(self.enter_password)
+        # and_re-entering_password
+        self.add_widget(Label(text="Re-enter Password: "))  # method_2: for display
+        self.re_enter = TextInput(multiline=False)
+        self.add_widget(self.re_enter)
+        # submit input
+        self.enter = Button(text="submit")
+        self.add_widget(self.enter)
+class MainApp(App):
     def build(self):
-        self.window = GridLayout()
-        self.window.cols = 1
-        # add widgets to window
+        return MyApp()
 
-        self.greet_user = Label(
-            text="hello!"
-            + "  " + "let's create your account"
-        )
-
-        self.window.add_widget(self.greet_user)
-        self.user_name = TextInput(multiline=False)
-        self.window.add_widget(self.user_name)
-
-        self.button = Button(text="Greet")
-        self.button.bind(on_press=self.callback)
-        self.window.add_widget(self.button)
-        return self.window
-    def callback(self, instance):
-        self.greet_user.text = "You are " + self.user_name.text + "!"
-
-
-if __name__ == '__main__':
-    MyApp().run()
+if __name__ == "__main__":
+    MainApp().run()
 
 # def create():
 #     print("-- create an Account --")
