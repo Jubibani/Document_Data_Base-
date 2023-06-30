@@ -1,0 +1,42 @@
+WindowManager:
+    FirstPage:
+    ErrorPage:
+
+<FirstPage>:
+    GridLayout:
+        cols: 1
+        size_hint: 0.5, 0.9
+        pos_hint: {"center_x": .5, "center_y": .5}
+        Image:
+            source: "447.png"
+        GridLayout:
+            cols: 2
+            spacing: "10dp"
+            Label:
+                text: "<User_name: >"
+                font_size: "20dp"
+            TextInput:
+                multiline: False
+            Label:
+                text: "<Enter_Password: >"
+                font_size: "20dp"
+            TextInput:
+                multiline: False
+            Label:
+                text: "<Re-enter_Password: >"
+                font_size: "20dp"
+            TextInput:
+                multiline: False
+
+            Button:
+                text: "Enter"
+                font_size: "20dp"
+                size_hint: 1,4
+                on_press: root.Pressed()
+            Button:
+                col:1
+                text: "clear"
+                font_size: "20dp"
+                size_hint: 1,4
+            Label:
+                text: root.text
