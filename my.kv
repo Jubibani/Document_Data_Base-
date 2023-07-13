@@ -1,42 +1,62 @@
 WindowManager:
-    FirstPage:
-    ErrorPage:
+    FirstWindow:
+    SecondWindow:
+    ThirdWindow:
 
-<FirstPage>:
-    GridLayout:
+<FirstWindow>:
+    name: "create"
+
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 5
+        padding: 50
         cols: 1
-        size_hint: 0.5, 0.9
-        pos_hint: {"center_x": .5, "center_y": .5}
         Image:
             source: "447.png"
-        GridLayout:
-            cols: 2
-            spacing: "10dp"
+            size_hint_y: "0.1dp"
+        Label:
+            text: "User_Login"
+            size_hint_y: "0.1dp"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            padding: 15
+
             Label:
-                text: "<User_name: >"
-                font_size: "20dp"
+                text: "User_Name: "
             TextInput:
-                multiline: False
+                multiline: "False"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            padding: 15
+
             Label:
-                text: "<Enter_Password: >"
-                font_size: "20dp"
+                text: "Enter_Password: "
             TextInput:
-                multiline: False
+                multiline: "False"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            padding: 15
+
+
             Label:
-                text: "<Re-enter_Password: >"
-                font_size: "20dp"
+                text: "**Re_Enter_Password: "
             TextInput:
-                multiline: False
+                multiline: "False"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.1
+            pos_hint: {'center_x': 0.5}
+            spacing: 10
+            Button:
+                text: "Clear"
 
             Button:
-                text: "Enter"
-                font_size: "20dp"
-                size_hint: 1,4
-                on_press: root.Pressed()
-            Button:
-                col:1
-                text: "clear"
-                font_size: "20dp"
-                size_hint: 1,4
-            Label:
-                text: root.text
+                text: "Submit"
+                on_press: root.log_in()
+<ThirdWindow>:
+    Label:
+        text: "You just Logged in!"
