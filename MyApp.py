@@ -7,31 +7,70 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 # define the kivy version
 kivy.require('2.2.1')
+
+
 # define the screens
 class FirstWindow(Screen):
     # Instantiating some variables
+    # these variables should also be in the kv.file to build (should be identical)
     username = ObjectProperty(None)
     password = ObjectProperty(None)
     re_password = ObjectProperty(None)
+
     # the buttons
+
+    # button for logging in
     def log_in(self):
-        print("You entered: ", self.username.text)
-        print("You entered: ", self.password.text)
-        print("You entered: ", self.re_password.text)
+        # If the input is not empty
+        # strip() method returns a non-empty string if there is input,
+        # and an empty string if there is no input,
+        # the condition will evaluate to True only if all fields have input.
+        if self.username.text.strip() and self.password.text.strip() and self.re_password.text.strip():
+            print("Greetings! ", self.username.text)
+            print("your password is: ", self.password.text)
+            # to check if the passwords are the same
+            if self.password.text.strip() != self.re_password.text.strip():
+                print("please check your inputs: ")
+                print("your input for password: ", self.password.text)
+                print("your input for re_password: ", self.re_password.text)
+        else:
+            # to check if required fields are inputted by the user
+            if not self.username.text.strip():
+                print("Username is required!")
+            if not self.password.text.strip():
+                print("Password is required!")
+            if not self.re_password.text.strip():
+                print("Re-password is required!")
+
+
+    # button for clearing inputs
+    def clear_input(self):
+        self.username.text = ""
+        self.password.text = ""
+        self.re_password.text = ""
+        print("cleared!")
+
 
 class SecondWindow(Screen):
     pass
+
+
 class ThirdWindow(Screen):
     pass
+
+
 class WindowManager(ScreenManager):
     pass
-# define kv.file
-kv = Builder.load_file("my.kv")
+
+
+
+
 # instantiate your app [an object just means to create it]
 class MainApp(App):
     def build(self):
+        # define kv.file
+        kv = Builder.load_file("my.kv")
         return kv
 
 if __name__ == '__main__':
     MainApp().run()
-

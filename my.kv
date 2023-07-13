@@ -5,6 +5,11 @@ WindowManager:
 
 <FirstWindow>:
     name: "create"
+    # the variables from py file
+    # these are to be used as ids in TextInput
+    username: username
+    password: password
+    re_password: re_password
 
 
     BoxLayout:
@@ -26,6 +31,7 @@ WindowManager:
             Label:
                 text: "User_Name: "
             TextInput:
+                id: username
                 multiline: "False"
         BoxLayout:
             orientation: "horizontal"
@@ -35,6 +41,7 @@ WindowManager:
             Label:
                 text: "Enter_Password: "
             TextInput:
+                id: password
                 multiline: "False"
         BoxLayout:
             orientation: "horizontal"
@@ -45,14 +52,17 @@ WindowManager:
             Label:
                 text: "**Re_Enter_Password: "
             TextInput:
+                id: re_password
                 multiline: "False"
         BoxLayout:
             orientation: "horizontal"
             size_hint_y: 0.1
             pos_hint: {'center_x': 0.5}
             spacing: 10
+
             Button:
                 text: "Clear"
+                on_press: root.clear_input()
 
             Button:
                 text: "Submit"
