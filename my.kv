@@ -2,6 +2,7 @@ WindowManager:
     FirstWindow:
     SecondWindow:
     ThirdWindow:
+    PopupWindow
 
 <FirstWindow>:
     name: "create"
@@ -66,7 +67,31 @@ WindowManager:
 
             Button:
                 text: "Submit"
-                on_press: root.log_in()
-<ThirdWindow>:
-    Label:
-        text: "You just Logged in!"
+                on_press:
+                    root.log_in()
+
+<SecondWindow>:
+    name: "second"
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 5
+        padding: 50
+        Label:
+            text: "You just Logged in!"
+        Button:
+            text: "Back"
+            on_press:
+                root.back_button()
+
+<PopupWindow>:
+    name: "popup"
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "please check your password"
+        Button:
+            text: "understood"
+            on_release:
+                root.understood()

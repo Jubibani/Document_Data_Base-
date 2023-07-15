@@ -4,6 +4,8 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.popup import Popup
+from kivy.uix.floatlayout import FloatLayout
 
 # define the kivy version
 kivy.require('2.2.1')
@@ -17,7 +19,15 @@ class FirstWindow(Screen):
     password = ObjectProperty(None)
     re_password = ObjectProperty(None)
 
-    # the buttons
+    # the popup
+    def PopupWindow(self):
+        show = PopupWindow()
+
+        popupwindow = Popup(
+            title="Warning!", content=show, size_hint=(None, None), size=(400, 400)
+        )
+        popupwindow.open()
+        show.popup =popupwindow
 
     # button for logging in
     def log_in(self):
@@ -25,14 +35,16 @@ class FirstWindow(Screen):
         # strip() method returns a non-empty string if there is input,
         # and an empty string if there is no input,
         # the condition will evaluate to True only if all fields have input.
-        if self.username.text.strip() and self.password.text.strip() and self.re_password.text.strip():
+        if self.username.text.strip() and self.password.text.strip() == self.re_password.text.strip():
             print("Greetings! ", self.username.text)
             print("your password is: ", self.password.text)
+            self.manager.current = "second"
             # to check if the passwords are the same
-            if self.password.text.strip() != self.re_password.text.strip():
-                print("please check your inputs: ")
-                print("your input for password: ", self.password.text)
-                print("your input for re_password: ", self.re_password.text)
+        if self.password.text.strip() != self.re_password.text.strip():
+            print("please check your inputs: ")
+            print("your input for password: ", self.password.text)
+            print("your input for re_password: ", self.re_password.text)
+            self.PopupWindow()
         else:
             # to check if required fields are inputted by the user
             if not self.username.text.strip():
@@ -50,20 +62,21 @@ class FirstWindow(Screen):
         self.re_password.text = ""
         print("cleared!")
 
-
-class SecondWindow(Screen):
     pass
+class SecondWindow(Screen):
+        def back_button(self):
+            self.manager.current = "create"
 
 
 class ThirdWindow(Screen):
+
     pass
-
-
+class PopupWindow(Screen):
+    def understood(self, popup):
+        popup.manager.current.dismiss()
+    pass
 class WindowManager(ScreenManager):
     pass
-
-
-
 
 # instantiate your app [an object just means to create it]
 class MainApp(App):
