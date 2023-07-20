@@ -1,8 +1,12 @@
+# factory lets you define a class and instantiate it anywhere in your app
+#: import Factory kivy.factory.Factory
+
 WindowManager:
     FirstWindow:
     SecondWindow:
     ThirdWindow:
     PopupWindow
+
 
 <FirstWindow>:
     name: "create"
@@ -21,6 +25,10 @@ WindowManager:
         Image:
             source: "447.png"
             size_hint_y: "0.1dp"
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.1
+
         Label:
             text: "User_Login"
             size_hint_y: "0.1dp"
@@ -69,6 +77,19 @@ WindowManager:
                 text: "Submit"
                 on_press:
                     root.log_in()
+                    root.manager.transition.direction = "up"
+                    app.popup.open()
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.1
+            pos_hint: {'center_x': 0.5}
+            spacing: 10
+
+            Button:
+                text: "exit"
+                on_press:
+                    app.stop()
 
 <SecondWindow>:
     name: "second"
@@ -83,15 +104,18 @@ WindowManager:
             text: "Back"
             on_press:
                 root.back_button()
-
-<PopupWindow>:
-    name: "popup"
+                root.manager.transition.direction = "down"
+<ThirdWindow>:
+<PopupWindow@Popup>:
+    auto_dismiss: False
+    title: "Warning"
+    size_hint: None, None
+    size: 400, 200
 
     BoxLayout:
         orientation: "vertical"
         Label:
-            text: "please check your password"
+            text: "Your condition is met!"
         Button:
-            text: "understood"
-            on_release:
-                root.understood()
+            text: "OK"
+            on_press: root.dismiss()

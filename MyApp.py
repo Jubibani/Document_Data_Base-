@@ -20,14 +20,11 @@ class FirstWindow(Screen):
     re_password = ObjectProperty(None)
 
     # the popup
-    def PopupWindow(self):
-        show = PopupWindow()
-
-        popupwindow = Popup(
-            title="Warning!", content=show, size_hint=(None, None), size=(400, 400)
-        )
-        popupwindow.open()
-        show.popup =popupwindow
+    # def PopupWindow(self):
+    #     popup = PopupWindow(
+    #         title="Warning!", size_hint=(None, None), size=(400, 400)
+    #     )
+    #     popup.open()
 
     # button for logging in
     def log_in(self):
@@ -44,7 +41,7 @@ class FirstWindow(Screen):
             print("please check your inputs: ")
             print("your input for password: ", self.password.text)
             print("your input for re_password: ", self.re_password.text)
-            self.PopupWindow()
+            self.Popup.open()
         else:
             # to check if required fields are inputted by the user
             if not self.username.text.strip():
@@ -53,7 +50,7 @@ class FirstWindow(Screen):
                 print("Password is required!")
             if not self.re_password.text.strip():
                 print("Re-password is required!")
-
+                self.Popup.open()
 
     # button for clearing inputs
     def clear_input(self):
@@ -63,20 +60,24 @@ class FirstWindow(Screen):
         print("cleared!")
 
     pass
+
+
 class SecondWindow(Screen):
-        def back_button(self):
-            self.manager.current = "create"
+    def back_button(self):
+        self.manager.current = "create"
 
 
 class ThirdWindow(Screen):
+    pass
 
+
+class PopupWindow(Popup):
     pass
-class PopupWindow(Screen):
-    def understood(self, popup):
-        popup.manager.current.dismiss()
-    pass
+
+
 class WindowManager(ScreenManager):
     pass
+
 
 # instantiate your app [an object just means to create it]
 class MainApp(App):
@@ -84,6 +85,7 @@ class MainApp(App):
         # define kv.file
         kv = Builder.load_file("my.kv")
         return kv
+
 
 if __name__ == '__main__':
     MainApp().run()
